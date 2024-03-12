@@ -24,9 +24,9 @@ namespace AnsBuster
         // Update is called once per frame
         void Update()
         {
-            // 1¾È
+            // 1ì•ˆ
             // Way1();
-            // 2¾È
+            // 2ì•ˆ
             Way2();
         }
 

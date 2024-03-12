@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int price;
+    [SerializeField] private int damage;
+    [SerializeField] private float range;
+    [SerializeField] private float atkRate;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private GameObject bullet;
+
+
+    private void SearchEnemy()
     {
-        
+        Collider[] _target = Physics.OverlapSphere(this.transform.position, range, layerMask);
+
+        for (int i = 0; i < _target.Length; i++)
+        {
+            Transform _targetTf = _target[i].transform; 
+
+            if (_targetTf.name == "Player")
+            {
+                Vector2 _direction = (_targetTf.position - this.transform.position).normalized;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CreateProjectile(Vector2 target)
     {
-        
+        var projectile = Instantiate(bullet, this.transform);
+        projectile.GetComponent<Bullet>().targetPosition = target;
     }
 }
