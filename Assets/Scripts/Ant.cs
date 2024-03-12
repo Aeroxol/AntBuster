@@ -1,3 +1,4 @@
+using AntBuster;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace AnsBuster
         public float turnTime;
 
         private Vector2 m_direction;
+        [SerializeField]
+        private Cell m_targetCell;
         private float m_turnTimer;
 
         // Start is called before the first frame update
@@ -21,20 +24,44 @@ namespace AnsBuster
         // Update is called once per frame
         void Update()
         {
+            // 1¾È
+            // Way1();
+            // 2¾È
+            Way2();
+        }
+
+        private void Way1()
+        {
             transform.Translate(moveSpeed * m_direction * Time.deltaTime);
             m_turnTimer -= Time.deltaTime;
-            if(m_turnTimer < 0)
+            if (m_turnTimer < 0)
             {
-                foo();
+                SetRandomDirection();
                 m_turnTimer += turnTime;
             }
         }
 
-        private void foo()
+        private void Way2()
+        {
+            if (m_targetCell == null) GetNextCell(GameManager.Instance.gameBoard);
+
+            m_direction = (m_targetCell.position - transform.position).normalized;
+            transform.Translate(moveSpeed * m_direction * Time.deltaTime);
+            if((transform.position - m_targetCell.position).magnitude < 0.1f){
+                m_targetCell = GetNextCell(GameManager.Instance.gameBoard);
+            }
+        }
+
+        private void SetRandomDirection()
         {
             float f = 360f * Random.value;
             Vector3 v = Quaternion.Euler(0, 0, f) * Vector3.right;
             m_direction = v;
+        }
+
+        private Cell GetNextCell(GameBoard gameBoard)
+        {
+            return gameBoard.GetNextCell(transform.position);
         }
     }
 }

@@ -223,6 +223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1633961422537790293, guid: 680eaa3515fef8043b335f98729aa450, type: 3}
+      propertyPath: gameBoard
+      value: 
+      objectReference: {fileID: 7607383795890663961}
     - target: {fileID: 4251061102977093036, guid: 680eaa3515fef8043b335f98729aa450, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -386,6 +390,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cf59316ee6d9246854d9b637e581ff, type: 3}
+--- !u!114 &7607383795890663961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 591557314967692876, guid: f6cf59316ee6d9246854d9b637e581ff, type: 3}
+  m_PrefabInstance: {fileID: 7607383795890663960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3d0900d5aa5cf42a0710ecd3d2c903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
