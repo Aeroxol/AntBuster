@@ -7,6 +7,8 @@ namespace AnsBuster
 {
     public class Ant : MonoBehaviour
     {
+        public SpriteRenderer spriteRenderer;
+
         public float moveSpeed;
         public float turnTime;
 
@@ -28,6 +30,10 @@ namespace AnsBuster
             // Way1();
             // 2¾È
             Way2();
+
+            Quaternion targetQ = Quaternion.FromToRotation(Vector3.up, m_direction);
+            float blend = 1f - Mathf.Pow(1f - 0.9f, Time.deltaTime);
+            spriteRenderer.transform.rotation = Quaternion.Lerp(spriteRenderer.transform.rotation, targetQ, blend);
         }
 
         private void Way1()
