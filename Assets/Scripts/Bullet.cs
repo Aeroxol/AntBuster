@@ -12,21 +12,13 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         // 임시로 5초 뒤 삭제. 
-        //Destroy(gameObject, 5f);
+        Destroy(gameObject, 5f);
     }
 
     // 총알 충돌 테스트를 위한 움직임 구현
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        transform.position += new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
-    }
-
-    private void Update()
-    {
-        //TrackingTarget(targetPosition, moveSpeed);
+        TrackingTarget(targetPosition, moveSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
