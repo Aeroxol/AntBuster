@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
-{    
-    public float moveSpeed = 5.0f;
-
-    public Vector2 targetPosition;
+{
+    private float bulletSpeed;
+    private Vector2 targetPosition;
 
     void Start()
     {
@@ -18,7 +17,7 @@ public class Bullet : MonoBehaviour
     // 총알 충돌 테스트를 위한 움직임 구현
     void FixedUpdate()
     {
-        TrackingTarget(targetPosition, moveSpeed);
+        TrackingTarget(targetPosition);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,8 +29,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void TrackingTarget(Vector2 targetPosition, float speed)
+    public void GetInfo(Vector2 target, float speed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed);
+        targetPosition = target;
+        bulletSpeed = speed;
+    }
+
+    private void TrackingTarget(Vector2 targetPosition)
+    {
+        print(targetPosition);
+        transform.Translate(targetPosition * bulletSpeed * Time.deltaTime);
     }
 }
