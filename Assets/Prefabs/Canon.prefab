@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 50
   atkRate: 0.5
-  bulletSpeed: 1
+  bulletSpeed: 5
   range: 7
   damage: 10
   layerMask:

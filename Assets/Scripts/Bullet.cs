@@ -37,7 +37,6 @@ public class Bullet : MonoBehaviour
 
     private void TrackingTarget(Vector2 targetPosition)
     {
-        print(targetPosition);
-        transform.Translate(targetPosition * bulletSpeed * Time.deltaTime);
+        transform.Translate(targetPosition.normalized * bulletSpeed * Time.deltaTime);
     }
 }
