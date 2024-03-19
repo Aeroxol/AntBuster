@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour
     private Vector2 targetPosition;
     private float timer;
 
+    private void OnEnable()
+    {
+        timer = 0;
+    }
 
     // 총알 충돌 테스트를 위한 움직임 구현
     void FixedUpdate()
