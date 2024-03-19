@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed;
     private Vector2 targetPosition;
+    private float timer;
 
-    void Start()
-    {
-        // 임시로 5초 뒤 삭제. 
-        Destroy(gameObject, 5f);
-    }
 
     // 총알 충돌 테스트를 위한 움직임 구현
     void FixedUpdate()
@@ -20,12 +13,22 @@ public class Bullet : MonoBehaviour
         TrackingTarget(targetPosition);
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 3.0f) 
+        {
+            timer = 0;
+            PoolManager.Instance.Release(gameObject, 1);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision != null)
         {
             print("공격에 맞음");
-            Destroy(gameObject);
+            PoolManager.Instance.Release(gameObject, 1);
         }
     }
 

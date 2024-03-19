@@ -14,7 +14,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private GameObject bullet;
 
     private bool isAttack = false;
-    private float currentRateOfFire = 0;
+    private float currentFireRate = 0;
     private Transform target;
 
     private void FixedUpdate()
@@ -29,8 +29,8 @@ public class Cannon : MonoBehaviour
         if(_target.Length > 0)
         {
             print("타겟 찾음");
-            Attack();
             target = _target[0].transform;  // TODO: 타겟팅 시스템이 추가되면 변경
+            Attack(target);
         }
         else
         {
@@ -38,19 +38,15 @@ public class Cannon : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack(Transform target)
     {
-        currentRateOfFire += Time.deltaTime;
-        if (currentRateOfFire >= atkRate)
+        currentFireRate += Time.deltaTime;
+        if (currentFireRate >= atkRate)
         {
-            currentRateOfFire = 0;
-            CreateProjectile(target.transform.position - transform.position);
+            currentFireRate = 0;
+            GameObject projectile = PoolManager.Instance.Get(1);
+            projectile.transform.position = this.transform.position;
+            projectile.GetComponent<Bullet>().GetInfo(target.position - transform.position, bulletSpeed);
         }
-    }
-
-    private void CreateProjectile(Vector2 target)
-    {
-        var projectile = Instantiate(bullet, transform.position, Quaternion.identity);
-        projectile.GetComponent<Bullet>().GetInfo(target, bulletSpeed);
     }
 }
