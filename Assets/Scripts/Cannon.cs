@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
+    [Header("캐논 스펙")]
     [SerializeField] private int price;
     [SerializeField] private float atkRate;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float range;
     [SerializeField] private int damage;
 
+    [Header("설정")]
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject atkRangeDisplay;
 
-    private bool isAttack = false;
     private float currentFireRate = 0;
     private Transform target;
+
+    private void Start()
+    {
+        atkRangeDisplay.transform.localScale = Vector3.one * range * 2;
+    }
 
     private void FixedUpdate()
     {
